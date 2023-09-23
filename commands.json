@@ -50,46 +50,6 @@
     ]
   },
   {
-    "name": "config",
-    "description": "Manage the bot's configuration",
-    "type": 1,
-    "options": [
-      {
-        "name": "set",
-        "description": "Set a configuration option",
-        "type": 1,
-        "options": [
-          {
-            "name": "option",
-            "description": "The configuration option to set",
-            "type": 3,
-            "required": true
-          },
-          {
-            "name": "value",
-            "description": "The value to set the option to",
-            "type": 3,
-            "required": true
-          }
-        ]
-      },
-      {
-        "name": "get",
-        "description": "Get a configuration option's value",
-        "type": 1,
-        "options": [
-          {
-            "name": "option",
-            "description": "The configuration option to get",
-            "type": 3,
-            "required": true
-          }
-        ]
-      }
-    ],
-    "default_member_permissions": 8
-  },
-  {
     "name": "events",
     "description": "Manage and view events",
     "type": 1,
