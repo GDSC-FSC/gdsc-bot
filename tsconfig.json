@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "outDir": "dist",
+    "strict": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "jsxFactory": "JSX.build",
+    "allowJs": true,
+    "typeRoots": [
+      "src/jsx/jsx.d.ts"
+    ],
+    "paths": {
+      "@src": [
+        "./src"
+      ],
+      "@src/*": [
+        "./src/*"
+      ],
+      "@types": [
+        "./src/types"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

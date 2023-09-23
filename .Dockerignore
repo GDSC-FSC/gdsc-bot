@@ -1,0 +1,6 @@
+# Directories
+/.github
+
+# Files
+*.md
+*.example

@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  discord-bot:
+    image: ghcr.io/gdfc-fsc/gdsc-bot:master
+    restart: always
+    environment:
+      - TOKEN=${TOKEN}
+      - CLIENT_ID=
+      - GUILD_ID=
+
+volumes:

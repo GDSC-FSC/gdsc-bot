@@ -1,0 +1,118 @@
+[
+  {
+    "name": "autoresponder",
+    "description": "Manage the auto-responder rules",
+    "type": 1,
+    "options": [
+      {
+        "name": "reload",
+        "description": "Load the changes made to the autoresponder rules",
+        "type": 1
+      },
+      {
+        "name": "add",
+        "description": "Add a new auto-responder rule",
+        "type": 1
+      },
+      {
+        "name": "remove",
+        "description": "Remove an existing auto-responder rule",
+        "type": 1,
+        "options": [
+          {
+            "name": "triggerphrase",
+            "description": "The trigger phrase of the rule to remove",
+            "type": 3,
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "view",
+        "description": "View all registered auto-responder rules",
+        "type": 1
+      }
+    ],
+    "default_member_permissions": 8
+  },
+  {
+    "name": "ping",
+    "description": "Check the bot's latency to the Discord API and PostgreSQL",
+    "type": 1,
+    "default_member_permissions": 0,
+    "options": [
+      {
+        "name": "ephemeral",
+        "description": "Choose whether the response should be ephemeral",
+        "type": 5,
+        "required": false
+      }
+    ]
+  },
+  {
+    "name": "config",
+    "description": "Manage the bot's configuration",
+    "type": 1,
+    "options": [
+      {
+        "name": "set",
+        "description": "Set a configuration option",
+        "type": 1,
+        "options": [
+          {
+            "name": "option",
+            "description": "The configuration option to set",
+            "type": 3,
+            "required": true
+          },
+          {
+            "name": "value",
+            "description": "The value to set the option to",
+            "type": 3,
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "get",
+        "description": "Get a configuration option's value",
+        "type": 1,
+        "options": [
+          {
+            "name": "option",
+            "description": "The configuration option to get",
+            "type": 3,
+            "required": true
+          }
+        ]
+      }
+    ],
+    "default_member_permissions": 8
+  },
+  {
+    "name": "events",
+    "description": "Manage and view events",
+    "type": 1,
+    "options": [
+      {
+        "name": "latest",
+        "description": "Get the latest event, title, description, and link",
+        "type": 1
+      },
+      {
+        "name": "list",
+        "description": "List all events",
+        "type": 1,
+        "options": [
+          {
+            "name": "limit",
+            "description": "Number of events to list",
+            "type": 4,
+            "required": false
+          }
+        ]
+      }
+    ],
+    "default_member_permissions": 0
+  }
+]
