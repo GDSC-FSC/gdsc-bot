@@ -6,7 +6,6 @@ services:
     restart: always
     environment:
       - TOKEN=${TOKEN}
-      - CLIENT_ID=
-      - GUILD_ID=
-
-volumes:
+      - CLIENT_ID=${CLIENT_ID}
+      - GUILD_ID=${GUILD_ID}
+      - notification_channel=${notification_channel}
