@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   discord-bot:
-    image: ghcr.io/gdfc-fsc/gdsc-bot:master
+    image: ghcr.io/gdsc-fsc/gdsc-bot:master
     restart: always
     environment:
       - TOKEN=${TOKEN}
