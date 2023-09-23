@@ -19,7 +19,7 @@ type Event = {
 
 
 const scrapeEvents = async (): Promise<Event[]> => {
-    const response = await axios.get('https://gdsc.community.dev/william-mary/');
+    const response = await axios.get('https://gdsc.community.dev/farmingdale-state-college/');
     const html = response.data;
     const $ = load(html);
 
