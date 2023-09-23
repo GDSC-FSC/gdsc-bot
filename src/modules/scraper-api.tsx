@@ -2,6 +2,8 @@ import express from 'express';
 import axios from 'axios';
 import {load} from 'cheerio';
 import db from '../utils/database';
+import {client} from '..';
+import {EventsModule} from './latestevents';
 
 const app = express();
 const PORT = 3000;
@@ -48,8 +50,8 @@ interface EventCountResult {
     count: number;
 }
 
-// this has code to avoid duplicates, the one below does not avoid duplicates
-/*const saveEventsToDB = (events: Event[]) => {
+// this has code to avoid duplicates
+const saveEventsToDB = (events: Event[]) => {
     const selectStmt = db.prepare('SELECT COUNT(*) as count FROM events WHERE title = ? AND date = ?');
     const insertStmt = db.prepare('INSERT INTO events (title, thumbnailLink, detailsLink, date, activityType, description) VALUES (?, ?, ?, ?, ?, ?)');
 
@@ -62,8 +64,11 @@ interface EventCountResult {
 
         insertStmt.run(event.title, event.thumbnailLink, event.detailsLink, event.date, event.activityType, event.description);
     }
-};*/
+};
 
+// This does Not have code to avoid duplicates
+
+/*
 const saveEventsToDB = (events: Event[]) => {
     const insertStmt = db.prepare('INSERT INTO events (title, thumbnailLink, detailsLink, date, activityType, description) VALUES (?, ?, ?, ?, ?, ?)');
 
@@ -71,6 +76,7 @@ const saveEventsToDB = (events: Event[]) => {
         insertStmt.run(event.title, event.thumbnailLink, event.detailsLink, event.date, event.activityType, event.description);
     }
 };
+*/
 
 app.get('/events', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -86,16 +92,29 @@ app.get('/events', (req, res) => {
 
 setInterval(async () => {
     console.log('Weekly scrape started...');
+    const eventsBeforeScrape = db.prepare('SELECT * FROM events').all();
     const events = await scrapeEvents();
     saveEventsToDB(events);
     console.log('Weekly scrape complete!');
+
+    const eventsAfterScrape = db.prepare('SELECT * FROM events').all();
+    if(eventsAfterScrape.length > eventsBeforeScrape.length) {
+        await EventsModule.notifyLatestEvent(client);
+    }
 }, 7 * 24 * 60 * 60 * 1000);
 
 app.listen(PORT, async () => {
     console.log(`Server started on http://localhost:${PORT}/events`);
 
     console.log('Initial scrape started...');
+    const eventsBeforeScrape = db.prepare('SELECT * FROM events').all();
     const initialEvents = await scrapeEvents();
     saveEventsToDB(initialEvents);
     console.log('Initial scrape complete!');
+
+    const eventsAfterScrape = db.prepare('SELECT * FROM events').all();
+    if(eventsAfterScrape.length > eventsBeforeScrape.length) {
+        await EventsModule.notifyLatestEvent(client);
+    }
 });
+
